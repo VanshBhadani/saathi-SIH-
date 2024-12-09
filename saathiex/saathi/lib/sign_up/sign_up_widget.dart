@@ -3,24 +3,25 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'log_in_model.dart';
-export 'log_in_model.dart';
+import 'sign_up_model.dart';
+export 'sign_up_model.dart';
 
-class LogInWidget extends StatefulWidget {
-  const LogInWidget({super.key});
+class SignUpWidget extends StatefulWidget {
+  const SignUpWidget({super.key});
 
   @override
-  State<LogInWidget> createState() => _LogInWidgetState();
+  State<SignUpWidget> createState() => _SignUpWidgetState();
 }
 
-class _LogInWidgetState extends State<LogInWidget>
+class _SignUpWidgetState extends State<SignUpWidget>
     with TickerProviderStateMixin {
-  late LogInModel _model;
+  late SignUpModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -29,13 +30,19 @@ class _LogInWidgetState extends State<LogInWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LogInModel());
+    _model = createModel(context, () => SignUpModel());
 
-    _model.emailTextController ??= TextEditingController();
-    _model.emailFocusNode ??= FocusNode();
+    _model.nameTextController ??= TextEditingController();
+    _model.nameFocusNode ??= FocusNode();
 
-    _model.passordTextController ??= TextEditingController();
-    _model.passordFocusNode ??= FocusNode();
+    _model.emailCTextController ??= TextEditingController();
+    _model.emailCFocusNode ??= FocusNode();
+
+    _model.passTextController ??= TextEditingController();
+    _model.passFocusNode ??= FocusNode();
+
+    _model.passCTextController ??= TextEditingController();
+    _model.passCFocusNode ??= FocusNode();
 
     animationsMap.addAll({
       'imageOnPageLoadAnimation': AnimationInfo(
@@ -44,7 +51,7 @@ class _LogInWidgetState extends State<LogInWidget>
           RotateEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
-            duration: 1010.0.ms,
+            duration: 700.0.ms,
             begin: 0.0,
             end: 1.0,
           ),
@@ -97,43 +104,11 @@ class _LogInWidgetState extends State<LogInWidget>
                             24.0, 0.0, 24.0, 0.0),
                         child: Image.asset(
                           'assets/images/image.png',
-                          width: 300.0,
-                          height: 208.0,
-                          fit: BoxFit.fitWidth,
+                          width: 237.0,
+                          height: 150.0,
+                          fit: BoxFit.contain,
                         ).animateOnPageLoad(
                             animationsMap['imageOnPageLoadAnimation']!),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              'SAATHI',
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context)
-                                  .displaySmall
-                                  .override(
-                                    fontFamily: 'Inter Tight',
-                                    color: Colors.white,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            Text(
-                              'Your SafeTouch Buddy',
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context)
-                                  .headlineSmall
-                                  .override(
-                                    fontFamily: 'Inter Tight',
-                                    color: Colors.white,
-                                    letterSpacing: 0.0,
-                                  ),
-                            ),
-                          ].divide(SizedBox(height: 12.0)),
-                        ),
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -157,7 +132,7 @@ class _LogInWidgetState extends State<LogInWidget>
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Text(
-                                    'Welcome Back!',
+                                    'Create Account',
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .headlineMedium
@@ -168,13 +143,93 @@ class _LogInWidgetState extends State<LogInWidget>
                                           letterSpacing: 0.0,
                                         ),
                                   ),
+                                  Text(
+                                    'Join KidsLearn and start your child\'s learning journey!',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
                                   TextFormField(
-                                    controller: _model.emailTextController,
-                                    focusNode: _model.emailFocusNode,
+                                    controller: _model.nameTextController,
+                                    focusNode: _model.nameFocusNode,
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelText: 'Parent\'s Email',
+                                      labelText: 'Parent\'s Full Name',
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
+                                      hintStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFFFFCDD2),
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                      ),
+                                      filled: true,
+                                      fillColor: Color(0xFFFFF8F8),
+                                      suffixIcon: Icon(
+                                        Icons.person,
+                                      ),
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyLarge
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          letterSpacing: 0.0,
+                                        ),
+                                    minLines: 1,
+                                    validator: _model
+                                        .nameTextControllerValidator
+                                        .asValidator(context),
+                                  ),
+                                  TextFormField(
+                                    controller: _model.emailCTextController,
+                                    focusNode: _model.emailCFocusNode,
+                                    autofocus: false,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      labelText: 'Email Address',
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -234,14 +289,14 @@ class _LogInWidgetState extends State<LogInWidget>
                                     minLines: 1,
                                     keyboardType: TextInputType.emailAddress,
                                     validator: _model
-                                        .emailTextControllerValidator
+                                        .emailCTextControllerValidator
                                         .asValidator(context),
                                   ),
                                   TextFormField(
-                                    controller: _model.passordTextController,
-                                    focusNode: _model.passordFocusNode,
+                                    controller: _model.passTextController,
+                                    focusNode: _model.passFocusNode,
                                     autofocus: false,
-                                    obscureText: !_model.passordVisibility,
+                                    obscureText: !_model.passVisibility,
                                     decoration: InputDecoration(
                                       labelText: 'Password',
                                       labelStyle: FlutterFlowTheme.of(context)
@@ -292,13 +347,13 @@ class _LogInWidgetState extends State<LogInWidget>
                                       fillColor: Color(0xFFFFF8F8),
                                       suffixIcon: InkWell(
                                         onTap: () => safeSetState(
-                                          () => _model.passordVisibility =
-                                              !_model.passordVisibility,
+                                          () => _model.passVisibility =
+                                              !_model.passVisibility,
                                         ),
                                         focusNode:
                                             FocusNode(skipTraversal: true),
                                         child: Icon(
-                                          _model.passordVisibility
+                                          _model.passVisibility
                                               ? Icons.visibility_outlined
                                               : Icons.visibility_off_outlined,
                                           size: 22,
@@ -313,30 +368,109 @@ class _LogInWidgetState extends State<LogInWidget>
                                         ),
                                     minLines: 1,
                                     validator: _model
-                                        .passordTextControllerValidator
+                                        .passTextControllerValidator
                                         .asValidator(context),
                                   ),
-                                  Text(
-                                    'Forgot Password?',
-                                    textAlign: TextAlign.end,
+                                  TextFormField(
+                                    controller: _model.passCTextController,
+                                    focusNode: _model.passCFocusNode,
+                                    autofocus: false,
+                                    obscureText: !_model.passCVisibility,
+                                    decoration: InputDecoration(
+                                      labelText: 'Confirm Password',
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
+                                      hintStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFFFFCDD2),
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                      ),
+                                      filled: true,
+                                      fillColor: Color(0xFFFFF8F8),
+                                      suffixIcon: InkWell(
+                                        onTap: () => safeSetState(
+                                          () => _model.passCVisibility =
+                                              !_model.passCVisibility,
+                                        ),
+                                        focusNode:
+                                            FocusNode(skipTraversal: true),
+                                        child: Icon(
+                                          _model.passCVisibility
+                                              ? Icons.visibility_outlined
+                                              : Icons.visibility_off_outlined,
+                                          size: 22,
+                                        ),
+                                      ),
+                                    ),
                                     style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
+                                        .bodyLarge
                                         .override(
                                           fontFamily: 'Inter',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
                                           letterSpacing: 0.0,
                                         ),
+                                    minLines: 1,
+                                    validator: _model
+                                        .passCTextControllerValidator
+                                        .asValidator(context),
                                   ),
                                   FFButtonWidget(
                                     onPressed: () async {
                                       GoRouter.of(context).prepareAuthEvent();
+                                      if (_model.passTextController.text !=
+                                          _model.passCTextController.text) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Passwords don\'t match!',
+                                            ),
+                                          ),
+                                        );
+                                        return;
+                                      }
 
-                                      final user =
-                                          await authManager.signInWithEmail(
+                                      final user = await authManager
+                                          .createAccountWithEmail(
                                         context,
-                                        _model.emailTextController.text,
-                                        _model.passordTextController.text,
+                                        _model.emailCTextController.text,
+                                        _model.passTextController.text,
                                       );
                                       if (user == null) {
                                         return;
@@ -345,7 +479,7 @@ class _LogInWidgetState extends State<LogInWidget>
                                       context.goNamedAuth(
                                           'homePage', context.mounted);
                                     },
-                                    text: 'Log In',
+                                    text: 'Sign Up',
                                     options: FFButtonOptions(
                                       width: MediaQuery.sizeOf(context).width *
                                           1.0,
@@ -372,7 +506,7 @@ class _LogInWidgetState extends State<LogInWidget>
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'New to KidsLearn?',
+                                        'Already have an account?',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -386,10 +520,10 @@ class _LogInWidgetState extends State<LogInWidget>
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
-                                          context.pushNamed('SignUp');
+                                          context.pushNamed('logIn');
                                         },
                                         child: Text(
-                                          'Sign Up',
+                                          'Log In',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -408,7 +542,21 @@ class _LogInWidgetState extends State<LogInWidget>
                           ),
                         ),
                       ),
-                    ].divide(SizedBox(height: 32.0)),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        child: Text(
+                          'By signing up, you agree to our Terms of Service and Privacy Policy',
+                          textAlign: TextAlign.center,
+                          style:
+                              FlutterFlowTheme.of(context).bodySmall.override(
+                                    fontFamily: 'Inter',
+                                    color: Colors.white,
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                      ),
+                    ].divide(SizedBox(height: 24.0)),
                   ),
                 ),
               ),
