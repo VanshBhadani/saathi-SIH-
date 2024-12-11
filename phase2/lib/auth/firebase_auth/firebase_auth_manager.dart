@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../auth_manager.dart';
+import '../base_auth_user_provider.dart';
+import '../../flutter_flow/flutter_flow_util.dart';
 
 import '/backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -310,7 +312,7 @@ class FirebaseAuthManager extends AuthManager
       }
       return userCredential == null
           ? null
-          : SaathiFirebaseUser.fromUserCredential(userCredential);
+          : Phase2FirebaseUser.fromUserCredential(userCredential);
     } on FirebaseAuthException catch (e) {
       final errorMsg = switch (e.code) {
         'email-already-in-use' =>
