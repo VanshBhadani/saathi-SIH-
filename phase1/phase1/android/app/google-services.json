@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "673087491142",
+    "project_id": "saathi-a3ro7w",
+    "storage_bucket": "saathi-a3ro7w.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:673087491142:android:e24d06400118ad089a4e47",
+        "android_client_info": {
+          "package_name": "com.mycompany.saathi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZSFq6en78F49rb35Jqw4BjigvapAmfWI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
